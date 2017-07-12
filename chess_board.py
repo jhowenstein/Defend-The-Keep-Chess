@@ -99,6 +99,7 @@ class Space(object):
 
 	def removePiece(self):
 		if self.isOccupied():
+			self.pieces[0].setLocation(99,99)
 			self.pieces = []
 		else:
 			print('Error! No piece to remove.')
@@ -111,11 +112,3 @@ class Space(object):
 		else:
 			print('Error. More than one piece at location' + self.x + ', ' + self.y)
 			return len(self.pieces)
-
-
-
-def isFriendly():
-	pass
-	# If is the same team as moving piece return True
-
-	# If is the opposite team return False

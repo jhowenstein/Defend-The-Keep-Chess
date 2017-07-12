@@ -1,3 +1,4 @@
+from chess_pieces import *
 
 class Board(object):
 	def __init__(self):
@@ -43,7 +44,7 @@ class Board(object):
 		BR2 = Rook(1, 'BR2')
 		BQ = Queen(1, 'BQ')
 		BK = King(1, 'BK')
-		BLACK_KEEP = Keep(0, 'Black Keep')
+		BLACK_KEEP = Keep(1, 'Black Keep')
 
 		# Initialize White Team Locations
 		self.spaces[79].addPiece(WP1)
@@ -112,3 +113,9 @@ class Space(object):
 		else:
 			print('Error. More than one piece at location' + self.x + ', ' + self.y)
 			return len(self.pieces)
+
+def board_index(x, y):
+	index = (x * 11) + y
+	return index
+
+

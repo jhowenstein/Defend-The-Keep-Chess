@@ -43,4 +43,4 @@ while MOVE == 1:
 	elif col < 0 or col > 10:
 		print('Error. Invalid Location')
 	else:
-		board.spaces[board_index(row,col)].pieces[0].move(target_row,target_col)
+		MOVE = board.spaces[board_index(row,col)].pieces[0].move(board, target_row,target_col)

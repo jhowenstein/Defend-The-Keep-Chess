@@ -1,5 +1,6 @@
 # Chess Pieces
 import numpy as np
+from chess_board import *
 
 class Piece(object):
 	def __init__(self, team, name):
@@ -28,7 +29,7 @@ class Pawn(Piece):
 
 	def move(self, board, new_x, new_y):
 		new_location = np.array([new_x, new_y])
-		delta = new_location - self.locationx
+		delta = new_location - self.location
 		curr_index = board_index(self.location[0], self.location[1])
 		new_index = board_index(new_x, new_y)
 		if not board.spaces[new_index].isOccupied():
@@ -36,29 +37,47 @@ class Pawn(Piece):
 				if delta[1] == 1 or delta[1] == -1:
 					board.spaces[curr_index].removePiece()
 					board.spaces[new_index].addPiece(self)
+					return 0
+				else:
+					print('Move not Valid')
+					return 1
 			elif delta[1] == 0:
-				if delta[0] == 1 or delta[1] == -1:
+				if delta[0] == 1 or delta[0] == -1:
 					board.spaces[curr_index].removePiece()
 					board.spaces[new_index].addPiece(self)
+					return 0
+				else:
+					print('Move not Valid')
+					return 1
 			else:
 				print('Move not Valid')
+				return 1
 		elif board.spaces[new_index].isOccupied():
 			if board.spaces[new_index].pieces[0].isFriendly():
 				print('Move not Valid')
-				# Loop break
+				return 1
 			else:
 				if delta[0] == -1:
 					if delta[1] == -1 or delta[1] == 1:
 						board.spaces[curr_index].removePiece()
 						board.spaces[new_index].removePiece()
 						board.spaces[new_index].addPiece(self)
+						return 0
+					else:
+						print('Move not Valid')
+						return 1
 				elif delta[0] == 1:
 					if delta[1] == -1 or delta[1] == 1:
 						board.spaces[curr_index].removePiece()
 						board.spaces[new_index].removePiece()
 						board.spaces[new_index].addPiece(self)
+						return 0
+					else:
+						print('Move not Valid')
+						return 1
 				else:
 					print('Move not Valid')
+					return 1
 
 
 class Rook(Piece):
@@ -70,7 +89,7 @@ class Rook(Piece):
 
 	def move(self, board, new_x, nex_y):
 		new_location = np.array([new_x, new_y])
-		delta = new_location - self.locationx
+		delta = new_location - self.location
 		curr_index = board_index(self.location[0], self.location[1])
 		new_index = board_index(new_x, new_y)
 		if delta[0] == 0:
@@ -79,34 +98,37 @@ class Rook(Piece):
 					for i in np.arange(1,delta[1]):
 						if board.spaces[board_index(self.location[0],self.location[1] + i)].isOccupied():
 							print('Move not Valid')
-							# Loop break
+							return 1
 				elif delta[1] < 0:
 					for i in np.arang(-1,delta[1]):
 						if board.spaces[board_index(self.location[0],self.location[1] + i)].isOccupied():
 							print('Move not Valid')
-							# Loop break
+							return 1
 		elif delta[1] == 0:
 			if abs(delta[0]) > 1:
 				if delta[0] > 0: # Was the move in positive direction?
 					for i in np.arange(1,delta[0]):
 						if board.spaces[board_index(self.location[0] + i,self.location[1])].isOccupied():
 							print('Move not Valid')
-							# Loop break
+							return 1
 				elif delta[0] < 0:
 					for i in np.arang(-1,delta[0]):
 						if board.spaces[board_index(self.location[0] + i,self.location[1])].isOccupied():
 							print('Move not Valid')
-							# Loop break
+							return 1
 		if board.spaces[new_index].isOccupied():
 			if board.spaces[new_index].pieces[0].isFriendly():
 				print('Move not Valid')
+				return 1
 			else: # If the location is occupied by an enemy piece; capture it
 				board.spaces[curr_index].removePiece()
 				board.spaces[new_index].removePiece()
 				board.spaces[new_index].addPiece(self)
+				return 0
 		else: # If the location is not occupied; move there
 			board.spaces[curr_index].removePiece()
 			board.spaces[new_index].addPiece(self)
+			return 0
 
 class Bishop(Piece):
 	def __init__(self, team, name):
@@ -117,12 +139,12 @@ class Bishop(Piece):
 
 	def move(self, board, new_x, nex_y):
 		new_location = np.array([new_x, new_y])
-		delta = new_location - self.locationx
+		delta = new_location - self.location
 		curr_index = board_index(self.location[0], self.location[1])
 		new_index = board_index(new_x, new_y)
 		if not abs(delta[0]) == abs(delta[1]):
 			print('Move not Valid')
-			# Loop break
+			return 1
 
 		if delta[0] > 0:
 			s0 = 1 # determining direction of move
@@ -137,17 +159,20 @@ class Bishop(Piece):
 			for i in np.arange(1,delta[0]):
 						if board.spaces[board_index(self.location[0] + (i * s0),self.location[1] + (i * s1))].isOccupied():
 							print('Move not Valid')
-							# Loop Break
+							return 1
 		if board.spaces[new_index].isOccupied():
 			if board.spaces[new_index].pieces[0].isFriendly():
 				print('Move not Valid')
+				return 1
 			else: # If the location is occupied by an enemy piece; capture it
 				board.spaces[curr_index].removePiece()
 				board.spaces[new_index].removePiece()
 				board.spaces[new_index].addPiece(self)
+				return 0
 		else: # If the location is not occupied; move there
 			board.spaces[curr_index].removePiece()
 			board.spaces[new_index].addPiece(self)
+			return 0
 
 class Knight(Piece):
 	def __init__(self, team, name):
@@ -158,7 +183,7 @@ class Knight(Piece):
 
 	def move(self, board, new_x, nex_y):
 		new_location = np.array([new_x, new_y])
-		delta = new_location - self.locationx
+		delta = new_location - self.location
 		curr_index = board_index(self.location[0], self.location[1])
 		new_index = board_index(new_x, new_y)
 		if abs(delta[0]) == 2 and abs(delta[1]) == 1:
@@ -167,17 +192,20 @@ class Knight(Piece):
 			pass
 		else:
 			print('Move not Valid')
-			# Break loop
+			return 1
 		if board.spaces[new_index].isOccupied():
 			if board.spaces[new_index].pieces[0].isFriendly():
 				print('Move not Valid')
+				return 1
 			else: # If the location is occupied by an enemy piece; capture it
 				board.spaces[curr_index].removePiece()
 				board.spaces[new_index].removePiece()
 				board.spaces[new_index].addPiece(self)
+				return 0
 		else: # If the location is not occupied; move there
 			board.spaces[curr_index].removePiece()
 			board.spaces[new_index].addPiece(self)
+			return 0
 
 
 class King(Piece):
@@ -189,26 +217,29 @@ class King(Piece):
 
 	def move(self, board, new_x, new_y):
 		new_location = np.array([new_x, new_y])
-		delta = new_location - self.locationx
+		delta = new_location - self.location
 		curr_index = board_index(self.location[0], self.location[1])
 		new_index = board_index(new_x, new_y)
 		if delta[0] == 0 and delta[1] == 0:
 			print('Select a new space to move this piece')
-			# Break loop
+			return 1
 		if abs(delta[0]) <= 1 and abs(delta[1]) <= 1:
 			if board.spaces[new_index].isOccupied():
 				if board.spaces[new_index].isFriendly():
 					print('Move not Valid')
-					# Break loop
+					return 1
 				else:
 					board.spaces[curr_index].removePiece()
 					board.spaces[new_index].removePiece()
 					board.spaces[new_index].addPiece(self)
+					return 0
 			else:
 				board.spaces[curr_index].removePiece()
 				board.spaces[new_index].addPiece(self)
+				return 0
 		else:
 			print('Move not Valid')
+			return 1
 
 
 class Queen(Piece):
@@ -220,7 +251,7 @@ class Queen(Piece):
 
 	def move(self, board, new_x, nex_y):
 		new_location = np.array([new_x, new_y])
-		delta = new_location - self.locationx
+		delta = new_location - self.location
 		curr_index = board_index(self.location[0], self.location[1])
 		new_index = board_index(new_x, new_y)
 		if delta[0] == 0:
@@ -229,24 +260,24 @@ class Queen(Piece):
 					for i in np.arange(1,delta[1]):
 						if board.spaces[board_index(self.location[0],self.location[1] + i)].isOccupied():
 							print('Move not Valid')
-							# Loop break
+							return 1
 				elif delta[1] < 0:
 					for i in np.arang(-1,delta[1]):
 						if board.spaces[board_index(self.location[0],self.location[1] + i)].isOccupied():
 							print('Move not Valid')
-							# Loop break
+							return 1
 		elif delta[1] == 0:
 			if abs(delta[0]) > 1:
 				if delta[0] > 0: # Was the move in positive direction?
 					for i in np.arange(1,delta[0]):
 						if board.spaces[board_index(self.location[0] + i,self.location[1])].isOccupied():
 							print('Move not Valid')
-							# Loop break
+							return 1
 				elif delta[0] < 0:
 					for i in np.arang(-1,delta[0]):
 						if board.spaces[board_index(self.location[0] + i,self.location[1])].isOccupied():
 							print('Move not Valid')
-							# Loop break
+							return 1
 		elif abs(delta[0]) == abs(delta[1]):
 			if delta[0] > 0:
 				s0 = 1 # determining direction of move
@@ -261,20 +292,24 @@ class Queen(Piece):
 				for i in np.arange(1,delta[0]):
 							if board.spaces[board_index(self.location[0] + (i * s0),self.location[1] + (i * s1))].isOccupied():
 								print('Move not Valid')
-								# Loop Break
+								return 1
 		else:
 			print('Move not Valid')
+			return 1
 
 		if board.spaces[new_index].isOccupied():
 			if board.spaces[new_index].pieces[0].isFriendly():
 				print('Move not Valid')
+				return 1
 			else: # If the location is occupied by an enemy piece; capture it
 				board.spaces[curr_index].removePiece()
 				board.spaces[new_index].removePiece()
 				board.spaces[new_index].addPiece(self)
+				return 0
 		else: # If the location is not occupied; move there
 			board.spaces[curr_index].removePiece()
 			board.spaces[new_index].addPiece(self)
+			return 0
 
 
 class Keep(Piece):
@@ -287,6 +322,11 @@ class Keep(Piece):
 
 	def move(self):
 		print('Cannot move keep. Select another piece to move.')
+
+
+def board_index(x, y):
+	index = (x * 11) + y
+	return index
 
 
 

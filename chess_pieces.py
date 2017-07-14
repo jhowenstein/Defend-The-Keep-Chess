@@ -53,13 +53,14 @@ class Pawn(Piece):
 				print('Move not Valid')
 				return 1
 		elif board.spaces[new_index].isOccupied():
-			if board.spaces[new_index].pieces[0].isFriendly():
+			if board.spaces[new_index].pieces[0].isFriendly(board.spaces[curr_index].pieces[0]):
 				print('Move not Valid')
 				return 1
 			else:
 				if delta[0] == -1:
 					if delta[1] == -1 or delta[1] == 1:
 						board.spaces[curr_index].removePiece()
+						print(board.spaces[new_index].pieces[0].name,'Captured!')
 						board.spaces[new_index].removePiece()
 						board.spaces[new_index].addPiece(self)
 						return 0
@@ -69,6 +70,7 @@ class Pawn(Piece):
 				elif delta[0] == 1:
 					if delta[1] == -1 or delta[1] == 1:
 						board.spaces[curr_index].removePiece()
+						print(board.spaces[new_index].pieces[0].name,'Captured!')
 						board.spaces[new_index].removePiece()
 						board.spaces[new_index].addPiece(self)
 						return 0

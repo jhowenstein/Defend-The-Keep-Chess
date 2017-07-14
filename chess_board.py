@@ -6,7 +6,7 @@ class Board(object):
 		for i in range(11):
 			for j in range(11):
 				self.spaces.append(Space(i,j))
-
+'''
 		# Initialize Piece Locations
 		# Initialize White team (Team = 0)
 		WP1 = Pawn(0, 'WP1')
@@ -83,7 +83,7 @@ class Board(object):
 		self.spaces[16].addPiece(BLACK_KEEP)
 		self.spaces[17].addPiece(BQ)
 		self.spaces[18].addPiece(BR2)
-
+'''
 class Space(object):
 	def __init__(self, x, y):
 		self.x = x

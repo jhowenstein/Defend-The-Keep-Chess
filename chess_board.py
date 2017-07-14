@@ -84,6 +84,7 @@ class Board(object):
 		self.spaces[17].addPiece(BQ)
 		self.spaces[18].addPiece(BR2)
 '''
+
 class Space(object):
 	def __init__(self, x, y):
 		self.x = x

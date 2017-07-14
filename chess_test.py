@@ -117,12 +117,13 @@ while WHITE_KEEP.status and BLACK_KEEP.status:
 		target_row,target_col = s.split(',')
 		target_row = int(target_row)
 		target_col = int(target_col)
+		print(target_col)
 		if row < 0 or row > 10:
 			print('Error. Invalid Location')
 		elif col < 0 or col > 10:
 			print('Error. Invalid Location')
 		else:
-			MOVE = board.spaces[board_index(row,col)].pieces[0].move(board, target_row,target_col)
+			MOVE = board.spaces[board_index(row,col)].pieces[0].move(board, target_row, target_col)
 			if MOVE == 0:
 				print('Move Sucessful')
 				if TURN == 0:

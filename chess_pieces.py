@@ -89,7 +89,7 @@ class Rook(Piece):
 		self.location = np.array([99,99]) # Place holder location, will also be consider "off board"
 		self.type = 'Rook'
 
-	def move(self, board, new_x, nex_y):
+	def move(self, board, new_x, new_y):
 		new_location = np.array([new_x, new_y])
 		delta = new_location - self.location
 		curr_index = board_index(self.location[0], self.location[1])
@@ -119,11 +119,12 @@ class Rook(Piece):
 							print('Move not Valid')
 							return 1
 		if board.spaces[new_index].isOccupied():
-			if board.spaces[new_index].pieces[0].isFriendly():
+			if board.spaces[new_index].pieces[0].isFriendly(board.spaces[curr_index].pieces[0]):
 				print('Move not Valid')
 				return 1
 			else: # If the location is occupied by an enemy piece; capture it
 				board.spaces[curr_index].removePiece()
+				print(board.spaces[new_index].pieces[0].name,'Captured!')
 				board.spaces[new_index].removePiece()
 				board.spaces[new_index].addPiece(self)
 				return 0
@@ -139,7 +140,7 @@ class Bishop(Piece):
 		self.location = np.array([99,99]) # Place holder location, will also be consider "off board"
 		self.type = 'Bishop'
 
-	def move(self, board, new_x, nex_y):
+	def move(self, board, new_x, new_y):
 		new_location = np.array([new_x, new_y])
 		delta = new_location - self.location
 		curr_index = board_index(self.location[0], self.location[1])
@@ -163,11 +164,12 @@ class Bishop(Piece):
 							print('Move not Valid')
 							return 1
 		if board.spaces[new_index].isOccupied():
-			if board.spaces[new_index].pieces[0].isFriendly():
+			if board.spaces[new_index].pieces[0].isFriendly(board.spaces[curr_index].pieces[0]):
 				print('Move not Valid')
 				return 1
 			else: # If the location is occupied by an enemy piece; capture it
 				board.spaces[curr_index].removePiece()
+				print(board.spaces[new_index].pieces[0].name,'Captured!')
 				board.spaces[new_index].removePiece()
 				board.spaces[new_index].addPiece(self)
 				return 0
@@ -183,7 +185,7 @@ class Knight(Piece):
 		self.location = np.array([99,99]) # Place holder location, will also be consider "off board"
 		self.type = 'Knight'
 
-	def move(self, board, new_x, nex_y):
+	def move(self, board, new_x, new_y):
 		new_location = np.array([new_x, new_y])
 		delta = new_location - self.location
 		curr_index = board_index(self.location[0], self.location[1])
@@ -196,11 +198,12 @@ class Knight(Piece):
 			print('Move not Valid')
 			return 1
 		if board.spaces[new_index].isOccupied():
-			if board.spaces[new_index].pieces[0].isFriendly():
+			if board.spaces[new_index].pieces[0].isFriendly(board.spaces[curr_index].pieces[0]):
 				print('Move not Valid')
 				return 1
 			else: # If the location is occupied by an enemy piece; capture it
 				board.spaces[curr_index].removePiece()
+				print(board.spaces[new_index].pieces[0].name,'Captured!')
 				board.spaces[new_index].removePiece()
 				board.spaces[new_index].addPiece(self)
 				return 0
@@ -227,11 +230,12 @@ class King(Piece):
 			return 1
 		if abs(delta[0]) <= 1 and abs(delta[1]) <= 1:
 			if board.spaces[new_index].isOccupied():
-				if board.spaces[new_index].isFriendly():
+				if board.spaces[new_index].isFriendly(board.spaces[curr_index].pieces[0]):
 					print('Move not Valid')
 					return 1
 				else:
 					board.spaces[curr_index].removePiece()
+					print(board.spaces[new_index].pieces[0].name,'Captured!')
 					board.spaces[new_index].removePiece()
 					board.spaces[new_index].addPiece(self)
 					return 0
@@ -251,7 +255,7 @@ class Queen(Piece):
 		self.location = np.array([99,99]) # Place holder location, will also be consider "off board"
 		self.type = 'Queen'
 
-	def move(self, board, new_x, nex_y):
+	def move(self, board, new_x, new_y):
 		new_location = np.array([new_x, new_y])
 		delta = new_location - self.location
 		curr_index = board_index(self.location[0], self.location[1])
@@ -300,11 +304,12 @@ class Queen(Piece):
 			return 1
 
 		if board.spaces[new_index].isOccupied():
-			if board.spaces[new_index].pieces[0].isFriendly():
+			if board.spaces[new_index].pieces[0].isFriendly(board.spaces[curr_index].pieces[0]):
 				print('Move not Valid')
 				return 1
 			else: # If the location is occupied by an enemy piece; capture it
 				board.spaces[curr_index].removePiece()
+				print(board.spaces[new_index].pieces[0].name,'Captured!')
 				board.spaces[new_index].removePiece()
 				board.spaces[new_index].addPiece(self)
 				return 0

@@ -101,6 +101,8 @@ class Space(object):
 	def removePiece(self):
 		if self.isOccupied():
 			self.pieces[0].setLocation(99,99)
+			if self.pieces[0].type == 'Keep':
+				self.pieces[0].status = False
 			self.pieces = []
 		else:
 			print('Error! No piece to remove.')

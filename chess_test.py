@@ -1,24 +1,46 @@
+
 from chess_board import *
 from chess_pieces import *
 
 board = Board()
 
-print(len(board.spaces))
+SELECT = 1
+TURN = 0
 
-print(board.spaces[22].x)
-print(board.spaces[22].y)
-print(board.spaces[22].isOccupied())
+while SELECT == 1:
+	print('Player:',TURN + 1,'Select a Piece (row,column)')
+	s = input()
+	row,col = s.split(',')
+	row = int(row)
+	col = int(col)
+	if row < 0 or row > 10:
+		print('Error. Invalid Location')
+	elif col < 0 or col > 10:
+		print('Error. Invalid Location')
+	elif not board.spaces[board_index(row,col)].isOccupied():
+		print('Error. No piece at this location')
+	elif not board.spaces[board_index(row,col)].pieces[0].team == TURN:
+		print('Error. This piece is on the other team')
+	elif board.spaces[board_index(row,col)].pieces[0].type == 'Keep':
+		print('Error. Cannot Move Keep')
+	else:
+		SELECT = 0
 
-pawn1 = Pawn(1, 'pawn1')
 
-board.spaces[22].addPiece(pawn1)
+print('Selection Good')
+print(board.spaces[board_index(row,col)].pieces[0].name)
 
-print(pawn1.location)
+MOVE = 1
 
-print(board.spaces[22].isOccupied())
-
-pawn1.move(board, 3, 0)
-
-print(board.spaces[22].isOccupied())
-print(board.spaces[33].isOccupied())
-
+while MOVE == 1:
+	print('Player',TURN + 1,'Select Location to Move Piece')
+	s = input()
+	target_row,target_col = s.split(',')
+	target_row = int(target_row)
+	target_col = int(target_col)
+	if row < 0 or row > 10:
+		print('Error. Invalid Location')
+	elif col < 0 or col > 10:
+		print('Error. Invalid Location')
+	else:
+		board.spaces[board_index(row,col)].pieces[0].move(target_row,target_col)

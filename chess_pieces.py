@@ -197,7 +197,7 @@ class King(Piece):
 			# Break loop
 		if abs(delta[0]) <= 1 and abs(delta[1]) <= 1:
 			if board.spaces[new_index].isOccupied():
-				if board.spaces[new_index]isFriendly():
+				if board.spaces[new_index].isFriendly():
 					print('Move not Valid')
 					# Break loop
 				else:
@@ -281,15 +281,9 @@ class Keep(Piece):
 	def __init__(self, team, name):
 		self.team = team
 		self.name = name
-		self.location = np.array([100,100]) # Special Place Holder for Keep. If location == 99,99 then game is over
+		self.location = np.array([99,99]) # Special Place Holder for Keep. If location == 99,99 then game is over
 		self.type = 'Keep'
-
-	def GameOver(self):
-		if self.location[0] == 99 and self.location[1] == 99:
-			if self.team = 0:
-				print('Game Over. Black Team Wins!')
-			elif self.team = 1:
-				print('Game Over. White Team Wins!')
+		self.status = True
 
 	def move(self):
 		print('Cannot move keep. Select another piece to move.')

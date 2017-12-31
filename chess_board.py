@@ -6,7 +6,16 @@ class Board(object):
 		for i in range(11):
 			for j in range(11):
 				self.spaces.append(Space(i,j))
-'''
+
+	def assignColors(self, color1, color2):
+		for i in range(len(self.spaces)):
+			if (i / 2) == round(i / 2):
+				self.spaces[i].color = color1
+			else:
+				self.spaces[i].color = color2
+
+
+	def initialize(self):
 		# Initialize Piece Locations
 		# Initialize White team (Team = 0)
 		WP1 = Pawn(0, 'WP1')
@@ -29,7 +38,7 @@ class Board(object):
 
 		# Initialize Black Team (Team = 1)
 		BP1 = Pawn(1, 'BP1')
-		BP2 = Pawn(1, 'P2')
+		BP2 = Pawn(1, 'BP2')
 		BP3 = Pawn(1, 'BP3')
 		BP4 = Pawn(1, 'BP4')
 		BP5 = Pawn(1, 'BP5')
@@ -83,12 +92,12 @@ class Board(object):
 		self.spaces[16].addPiece(BLACK_KEEP)
 		self.spaces[17].addPiece(BQ)
 		self.spaces[18].addPiece(BR2)
-'''
 
 class Space(object):
 	def __init__(self, x, y):
 		self.x = x
 		self.y = y
+		self.color = None
 		self.pieces = []
 
 	def addPiece(self, piece):
@@ -116,6 +125,10 @@ class Space(object):
 		else:
 			print('Error. More than one piece at location' + self.x + ', ' + self.y)
 			return len(self.pieces)
+
+	def changeColor(self, newColor):
+		self.color = newColor
+
 
 def board_index(x, y):
 	index = (x * 11) + y

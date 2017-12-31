@@ -28,6 +28,8 @@ def highlightSpace(DISPLAYSURF, XMARGIN, YMARGIN, HIGHLIGHT_COLOR, SQUARE_SIZE, 
 	left = XMARGIN + (col * SQUARE_SIZE)
 	top = YMARGIN + (row * SQUARE_SIZE)
 	pygame.draw.rect(DISPLAYSURF, HIGHLIGHT_COLOR, (left, top, SQUARE_SIZE, SQUARE_SIZE))
+	space_index = board_index(row, col)
+	DISPLAYSURF.blit(board.spaces[space_index].pieces[0].img, (left, top))
 
 def unHighlight(DISPLAYSURF, XMARGIN, YMARGIN, SQUARE_SIZE, board, row, col):
 	left = XMARGIN + (col * SQUARE_SIZE)

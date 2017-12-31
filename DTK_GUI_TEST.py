@@ -70,6 +70,7 @@ BQ = Queen(1, 'BQ')
 BK = King(1, 'BK')
 BLACK_KEEP = Keep(1, 'Black Keep')
 
+'''
 wKing_img = pygame.image.load('Chess_klt60.png')
 wQueen_img = pygame.image.load('Chess_qlt60.png')
 wBishop_img = pygame.image.load('Chess_blt60.png')
@@ -83,6 +84,7 @@ bBishop_img = pygame.image.load('Chess_bdt60.png')
 bRook_img = pygame.image.load('Chess_rdt60.png')
 bKnight_img = pygame.image.load('Chess_ndt60.png')
 bPawn_img = pygame.image.load('Chess_pdt60.png')
+'''
 
 # Initialize White Team Locations
 board.spaces[79].addPiece(WP1)
@@ -125,7 +127,7 @@ board.spaces[18].addPiece(BR2)
 pygame.init()
 DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
 DISPLAYSURF.fill(BG_COLOR)
-drawBoard(DISPLAYSURF, BOARDWIDTH, SQUARE_SIZE, XMARGIN, YMARGIN, COLOR1, COLOR2)
+drawBoard(DISPLAYSURF, BOARDWIDTH, SQUARE_SIZE, XMARGIN, YMARGIN, COLOR1, COLOR2, board)
 
 TURN = 0
 
@@ -147,6 +149,7 @@ while WHITE_KEEP.status and BLACK_KEEP.status:
 					mousex, mousey = event.pos
 					mouseClicked = True
 			pygame.display.update()
+
 		row,col = determineSpace(mousex, mousey, XMARGIN, YMARGIN, SQUARE_SIZE)
 		if row < 0 or row > 10:
 			print('Error. Invalid Location')
@@ -191,6 +194,8 @@ while WHITE_KEEP.status and BLACK_KEEP.status:
 			if MOVE == 0:
 				print('Move Sucessful')
 				unHighlight(DISPLAYSURF, XMARGIN, YMARGIN, board, row, col)
+				drawBoard(DISPLAYSURF, BOARDWIDTH, SQUARE_SIZE, XMARGIN, YMARGIN, COLOR1, COLOR2, board)
+				pygame.display.update()
 				if TURN == 0:
 					TURN = 1
 				elif TURN == 1:

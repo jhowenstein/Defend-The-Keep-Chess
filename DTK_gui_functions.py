@@ -24,7 +24,7 @@ def determineSpace(mousex, mousey, XMARGIN, YMARGIN, SQUARE_SIZE):
 	print(row,',',col)
 	return row, col
 
-def highlightSpace(DISPLAYSURF, XMARGIN, YMARGIN, HIGHLIGHT_COLOR, SQUARE_SIZE, row, col):
+def highlightSpace(DISPLAYSURF, XMARGIN, YMARGIN, HIGHLIGHT_COLOR, SQUARE_SIZE, board, row, col):
 	left = XMARGIN + (col * SQUARE_SIZE)
 	top = YMARGIN + (row * SQUARE_SIZE)
 	pygame.draw.rect(DISPLAYSURF, HIGHLIGHT_COLOR, (left, top, SQUARE_SIZE, SQUARE_SIZE))

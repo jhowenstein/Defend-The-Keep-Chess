@@ -148,7 +148,7 @@ while WHITE_KEEP.status and BLACK_KEEP.status:
 		else:
 			print('Selection Good')
 			print(board.spaces[board_index(row,col)].pieces[0].name)
-			highlightSpace(DISPLAYSURF, XMARGIN, YMARGIN, HIGHLIGHT_COLOR, SQUARE_SIZE, row, col)
+			highlightSpace(DISPLAYSURF, XMARGIN, YMARGIN, HIGHLIGHT_COLOR, SQUARE_SIZE, board, row, col)
 			SELECT = 0
 
 	MOVE = True
@@ -179,7 +179,7 @@ while WHITE_KEEP.status and BLACK_KEEP.status:
 
 		if undoMove == True:
 			break
-			
+
 		target_row,target_col = determineSpace(mousex, mousey, XMARGIN, YMARGIN, SQUARE_SIZE)
 		if row < 0 or row > 10:
 			print('Error. Invalid Location')

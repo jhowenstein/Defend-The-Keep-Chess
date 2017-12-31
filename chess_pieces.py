@@ -1,6 +1,7 @@
 # Chess Pieces
 import numpy as np
 from chess_board import *
+import pygame, sys, math
 
 class Piece(object):
 	def __init__(self, team, name):
@@ -26,9 +27,9 @@ class Pawn(Piece):
 		self.name = name
 		self.location = np.array([99,99]) # Place holder location, will also be consider "off board"
 		self.type = 'Pawn'
-		if self.team = 0:
+		if self.team == 0:
 			self.img = pygame.image.load('Chess_plt60.png')
-		elif self.team = 1:
+		elif self.team == 1:
 			self.img = pygame.image.load('Chess_pdt60.png')
 
 	def move(self, board, new_x, new_y):
@@ -92,9 +93,9 @@ class Rook(Piece):
 		self.name = name
 		self.location = np.array([99,99]) # Place holder location, will also be consider "off board"
 		self.type = 'Rook'
-		if self.team = 0:
+		if self.team == 0:
 			self.img = pygame.image.load('Chess_rlt60.png')
-		elif self.team = 1:
+		elif self.team == 1:
 			self.img = pygame.image.load('Chess_rdt60.png')
 
 	def move(self, board, new_x, new_y):
@@ -147,9 +148,9 @@ class Bishop(Piece):
 		self.name = name
 		self.location = np.array([99,99]) # Place holder location, will also be consider "off board"
 		self.type = 'Bishop'
-		if self.team = 0:
+		if self.team == 0:
 			self.img = pygame.image.load('Chess_blt60.png')
-		elif self.team = 1:
+		elif self.team == 1:
 			self.img = pygame.image.load('Chess_bdt60.png')
 
 	def move(self, board, new_x, new_y):
@@ -196,9 +197,9 @@ class Knight(Piece):
 		self.name = name
 		self.location = np.array([99,99]) # Place holder location, will also be consider "off board"
 		self.type = 'Knight'
-		if self.team = 0:
+		if self.team == 0:
 			self.img = pygame.image.load('Chess_nlt60.png')
-		elif self.team = 1:
+		elif self.team == 1:
 			self.img = pygame.image.load('Chess_ndt60.png')
 
 	def move(self, board, new_x, new_y):
@@ -235,9 +236,9 @@ class King(Piece):
 		self.name = name
 		self.location = np.array([99,99]) # Place holder location, will also be consider "off board"
 		self.type = 'King'
-		if self.team = 0:
+		if self.team == 0:
 			self.img = pygame.image.load('Chess_klt60.png')
-		elif self.team = 1:
+		elif self.team == 1:
 			self.img = pygame.image.load('Chess_kdt60.png')
 
 	def move(self, board, new_x, new_y):
@@ -274,10 +275,10 @@ class Queen(Piece):
 		self.name = name
 		self.location = np.array([99,99]) # Place holder location, will also be consider "off board"
 		self.type = 'Queen'
-		if self.team = 0:
+		if self.team == 0:
 			self.img = pygame.image.load('Chess_qlt60.png')
 		elif self.team = 1:
-			self.img = pygame.image.load('Chess_qdt60.png')
+			self.img == pygame.image.load('Chess_qdt60.png')
 
 	def move(self, board, new_x, new_y):
 		new_location = np.array([new_x, new_y])
@@ -350,9 +351,9 @@ class Keep(Piece):
 		self.location = np.array([99,99]) # Special Place Holder for Keep. If location == 99,99 then game is over
 		self.type = 'Keep'
 		self.status = True
-		if self.team = 0:
+		if self.team == 0:
 			self.img = pygame.image.load('Chess_rlt60.png')
-		elif self.team = 1:
+		elif self.team == 1:
 			self.img = pygame.image.load('Chess_rdt60.png')
 
 	def move(self):

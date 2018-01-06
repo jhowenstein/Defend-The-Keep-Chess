@@ -111,7 +111,7 @@ class Rook(Piece):
 							print('Move not Valid')
 							return 1
 				elif delta[1] < 0:
-					for i in np.arang(-1,delta[1]):
+					for i in np.arange(-1,delta[1]):
 						if board.spaces[board_index(self.location[0],self.location[1] + i)].isOccupied():
 							print('Move not Valid')
 							return 1

@@ -277,8 +277,8 @@ class Queen(Piece):
 		self.type = 'Queen'
 		if self.team == 0:
 			self.img = pygame.image.load('Chess_qlt60.png')
-		elif self.team = 1:
-			self.img == pygame.image.load('Chess_qdt60.png')
+		elif self.team == 1:
+			self.img = pygame.image.load('Chess_qdt60.png')
 
 	def move(self, board, new_x, new_y):
 		new_location = np.array([new_x, new_y])
